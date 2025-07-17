@@ -16,9 +16,10 @@ class Book extends Model
         'titre',
         'author_id',
         'annee',
-        'statut',
+        'statut_id',
         'favori',
-        'note'
+        'note',
+        'image'
     ];
 
     protected $casts =[
@@ -34,4 +35,16 @@ class Book extends Model
    {
        return $this->belongsTo(Author::class);
    }
+
+   public function statut(): BelongsTo
+   {
+       return $this->belongsTo(Statut::class);
+   }
+   
+   //Accesseur pour l'url complete de l'image
+   public function getImageUrlAttribute() {
+        return $this->image ? asset('storage/books' .$this->image) : null ;
+    
+   }
+
 }
